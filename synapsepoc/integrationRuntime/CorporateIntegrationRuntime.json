@@ -1,0 +1,6 @@
+{
+	"name": "CorporateIntegrationRuntime",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
