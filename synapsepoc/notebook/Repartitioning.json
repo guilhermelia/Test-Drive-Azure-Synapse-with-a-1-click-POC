@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "881e0bb2-e3c8-48b9-9f93-7526ea9e0513"
+				"spark.autotune.trackingId": "9b4e2fa4-b4ab-4ec5-aee9-ce0bff6c37a2"
 			}
 		},
 		"metadata": {
@@ -48,6 +48,19 @@
 			"sessionKeepAliveTimeout": 30
 		},
 		"cells": [
+			{
+				"cell_type": "markdown",
+				"metadata": {
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"# Processamento paralelo no Spark!"
+				]
+			},
 			{
 				"cell_type": "code",
 				"source": [
