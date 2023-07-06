@@ -1,0 +1,16 @@
+{
+	"name": "DestinationDataset_0ds",
+	"properties": {
+		"annotations": [],
+		"type": "SqlPoolTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": "Customer"
+		},
+		"sqlPool": {
+			"referenceName": "llkjijyvkg5j76wqpocws1p1",
+			"type": "SqlPoolReference"
+		}
+	}
+}
