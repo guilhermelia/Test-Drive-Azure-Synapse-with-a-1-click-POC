@@ -1,0 +1,16 @@
+{
+	"name": "AdventureWorksLT",
+	"type": "Microsoft.Synapse/workspaces/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "SqlServer",
+		"typeProperties": {
+			"connectionString": "integrated security=False;data source=WIN-BBJA0NQEPQD;initial catalog=AdventureWorks;user id=sqladmin",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJlMDk1YjNjYy1iYjNiLTQ0N2UtYjA4OS03MjA5NDNjYjgxZGUiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "CorporateIntegrationRuntime",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}
