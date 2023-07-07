@@ -1,0 +1,16 @@
+{
+	"name": "DestinationDataset_r82",
+	"properties": {
+		"annotations": [],
+		"type": "SqlPoolTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "SalesLT",
+			"table": "Products"
+		},
+		"sqlPool": {
+			"referenceName": "llkjijyvkg5j76wqpocws1p1",
+			"type": "SqlPoolReference"
+		}
+	}
+}
