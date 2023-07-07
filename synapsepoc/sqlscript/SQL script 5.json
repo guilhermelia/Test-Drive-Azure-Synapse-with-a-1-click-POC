@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 5",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseParquetFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseParquetFormat] \n\tWITH ( FORMAT_TYPE = PARQUET)\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'public_llkjijyvkg5j76wqpoc_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [public_llkjijyvkg5j76wqpoc_dfs_core_windows_net] \n\tWITH (\n\t\tLOCATION = 'abfss://public@llkjijyvkg5j76wqpoc.dfs.core.windows.net' \n\t)\nGO\n\nCREATE EXTERNAL TABLE dbo.Embrapa (\n\t[registration_dttm] datetime2(7),\n\t[id] int,\n\t[first_name] nvarchar(4000),\n\t[last_name] nvarchar(4000),\n\t[email] nvarchar(4000),\n\t[gender] nvarchar(4000),\n\t[ip_address] nvarchar(4000),\n\t[cc] nvarchar(4000),\n\t[country] nvarchar(4000),\n\t[birthdate] nvarchar(4000),\n\t[salary] float,\n\t[title] nvarchar(4000),\n\t[comments] nvarchar(4000)\n\t)\n\tWITH (\n\tLOCATION = 'userdata/userdata2.parquet',\n\tDATA_SOURCE = [public_llkjijyvkg5j76wqpoc_dfs_core_windows_net],\n\tFILE_FORMAT = [SynapseParquetFormat]\n\t)\nGO\n\n\nSELECT TOP 100 * FROM dbo.Embrapa\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "aiad",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
