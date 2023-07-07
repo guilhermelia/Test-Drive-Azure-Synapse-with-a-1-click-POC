@@ -11,6 +11,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'AdventureWorksLT'"
 		},
+		"SqlServerEmbrapa_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'SqlServerEmbrapa'"
+		},
 		"TripFaresSynapseAnalyticsLinkedService_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'TripFaresSynapseAnalyticsLinkedService'",
@@ -276,6 +280,71 @@
 			"dependsOn": [
 				"[concat(variables('workspaceId'), '/datasets/SourceDataset_0ds')]",
 				"[concat(variables('workspaceId'), '/datasets/DestinationDataset_0ds')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Demonstracao-Embrapa')]",
+			"type": "Microsoft.Synapse/workspaces/pipelines",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "SqlServerSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlPoolSink",
+								"writeBehavior": "Insert"
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SqlServerTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "SqlPoolTable1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/datasets/SqlServerTable1')]",
+				"[concat(variables('workspaceId'), '/datasets/SqlPoolTable1')]"
 			]
 		},
 		{
@@ -1022,6 +1091,220 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/SqlPoolTable1')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "SqlPoolTable",
+				"schema": [
+					{
+						"name": "ProductID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProductNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Color",
+						"type": "nvarchar"
+					},
+					{
+						"name": "StandardCost",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "ListPrice",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "Size",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Weight",
+						"type": "decimal",
+						"precision": 8,
+						"scale": 2
+					},
+					{
+						"name": "ProductCategoryID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ProductModelID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SellStartDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "SellEndDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "DiscontinuedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ThumbNailPhoto",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ThumbnailPhotoFileName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "rowguid",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ModifiedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "SalesLT",
+					"table": "Product"
+				},
+				"sqlPool": {
+					"referenceName": "llkjijyvkg5j76wqpocws1p1",
+					"type": "SqlPoolReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/sqlPools/llkjijyvkg5j76wqpocws1p1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SqlServerTable1')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServerEmbrapa",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "ProductID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Name",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ProductNumber",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Color",
+						"type": "nvarchar"
+					},
+					{
+						"name": "StandardCost",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "ListPrice",
+						"type": "money",
+						"precision": 19,
+						"scale": 4
+					},
+					{
+						"name": "Size",
+						"type": "nvarchar"
+					},
+					{
+						"name": "Weight",
+						"type": "decimal",
+						"precision": 8,
+						"scale": 2
+					},
+					{
+						"name": "ProductCategoryID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ProductModelID",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SellStartDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "SellEndDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "DiscontinuedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ThumbNailPhoto",
+						"type": "varbinary"
+					},
+					{
+						"name": "ThumbnailPhotoFileName",
+						"type": "nvarchar"
+					},
+					{
+						"name": "rowguid",
+						"type": "uniqueidentifier"
+					},
+					{
+						"name": "ModifiedDate",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "SalesLT",
+					"table": "Product"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/SqlServerEmbrapa')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/azureSynapseAnalyticsSchema')]",
 			"type": "Microsoft.Synapse/workspaces/datasets",
 			"apiVersion": "2019-06-01-preview",
@@ -1472,6 +1755,25 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/SqlServerEmbrapa')]",
+			"type": "Microsoft.Synapse/workspaces/linkedServices",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"connectionString": "[parameters('SqlServerEmbrapa_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "CorporateIntegrationRuntime",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/integrationRuntimes/CorporateIntegrationRuntime')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/TripFaresDataLakeStorageLinkedService')]",
 			"type": "Microsoft.Synapse/workspaces/linkedServices",
 			"apiVersion": "2019-06-01-preview",
@@ -1615,6 +1917,16 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/IntegrationRuntimeEmbrapa')]",
+			"type": "Microsoft.Synapse/workspaces/integrationRuntimes",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"type": "SelfHosted",
+				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/tripFaresDataTransformations')]",
 			"type": "Microsoft.Synapse/workspaces/dataflows",
 			"apiVersion": "2019-06-01-preview",
@@ -1673,6 +1985,46 @@
 			"properties": {
 				"type": "ManagedIdentity",
 				"typeProperties": {}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 1')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "CREATE TABLE [SalesLT].[Product](\n\t[ProductID] [int] IDENTITY(1,1) NOT NULL,\n\t[Name] [nvarchar] NOT NULL,\n\t[ProductNumber] [nvarchar] NOT NULL,\n\t[Color] [nvarchar] NULL,\n\t[StandardCost] [money] NOT NULL,\n\t[ListPrice] [money] NOT NULL,\n\t[Size] [nvarchar](5) NULL,\n\t[Weight] [decimal](8, 2) NULL,\n\t[ProductCategoryID] [int] NULL,\n\t[ProductModelID] [int] NULL,\n\t[SellStartDate] [datetime] NOT NULL,\n\t[SellEndDate] [datetime] NULL,\n\t[DiscontinuedDate] [datetime] NULL,\n\t[ThumbNailPhoto] [nvarchar] NULL,\n\t[ThumbnailPhotoFileName] [nvarchar](50) NULL,\n\t[rowguid] [nvarchar] NOT NULL,\n\t[ModifiedDate] [datetime] NOT NULL)",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "llkjijyvkg5j76wqpocws1p1",
+						"poolName": "llkjijyvkg5j76wqpocws1p1"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 2')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [ProductID]\n,[Name]\n,[ProductNumber]\n,[Color]\n,[StandardCost]\n,[ListPrice]\n,[Size]\n,[Weight]\n,[ProductCategoryID]\n,[ProductModelID]\n,[SellStartDate]\n,[SellEndDate]\n,[DiscontinuedDate]\n,[ThumbNailPhoto]\n,[ThumbnailPhotoFileName]\n,[rowguid]\n,[ModifiedDate]\n FROM [SalesLT].[Product]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "llkjijyvkg5j76wqpocws1p1",
+						"poolName": "llkjijyvkg5j76wqpocws1p1"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
 			},
 			"dependsOn": []
 		},

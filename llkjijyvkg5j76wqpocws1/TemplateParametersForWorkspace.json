@@ -8,6 +8,9 @@
 		"AdventureWorksLT_connectionString": {
 			"value": ""
 		},
+		"SqlServerEmbrapa_connectionString": {
+			"value": ""
+		},
 		"TripFaresSynapseAnalyticsLinkedService_connectionString": {
 			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=@{linkedService().SynapseWorkspaceName};Initial Catalog=@{linkedService().SQLDedicatedPoolName};User ID=@{linkedService().SQLLoginUsername}"
 		},
