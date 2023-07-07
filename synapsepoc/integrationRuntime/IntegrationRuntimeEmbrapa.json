@@ -1,0 +1,6 @@
+{
+	"name": "IntegrationRuntimeEmbrapa",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}
