@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 1",
+	"properties": {
+		"content": {
+			"query": "CREATE TABLE [SalesLT].[Product](\n\t[ProductID] [int] IDENTITY(1,1) NOT NULL,\n\t[Name] [nvarchar] NOT NULL,\n\t[ProductNumber] [nvarchar] NOT NULL,\n\t[Color] [nvarchar] NULL,\n\t[StandardCost] [money] NOT NULL,\n\t[ListPrice] [money] NOT NULL,\n\t[Size] [nvarchar](5) NULL,\n\t[Weight] [decimal](8, 2) NULL,\n\t[ProductCategoryID] [int] NULL,\n\t[ProductModelID] [int] NULL,\n\t[SellStartDate] [datetime] NOT NULL,\n\t[SellEndDate] [datetime] NULL,\n\t[DiscontinuedDate] [datetime] NULL,\n\t[ThumbNailPhoto] [nvarchar] NULL,\n\t[ThumbnailPhotoFileName] [nvarchar](50) NULL,\n\t[rowguid] [nvarchar] NOT NULL,\n\t[ModifiedDate] [datetime] NOT NULL)",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "llkjijyvkg5j76wqpocws1p1",
+				"poolName": "llkjijyvkg5j76wqpocws1p1"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
